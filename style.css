@@ -1,0 +1,18 @@
+*{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-item{
+    text-align: center !important;
+}
+
+.error{
+    color: red;
+    border: 3px solid red;
+    background-color: black;
+    font-size: 1.2rem;
+}
+p{
+    margin: 0;
+    padding: 0;
+}   
