@@ -17,13 +17,13 @@ function checkItemPost()
                 VALUES ('" . $guid . "', '" . $name . "', '" . $description . "', '" . $category . "', '" . $price . "', '" . $userhash . "')";
 
         if ($conn->query($sql) === TRUE) {
-
+            echo '<p class="success text-center py-3">A termék sikeresen feltöltésre került!</p>';
         } else {
             echo '<p class="error">Adatbázis hiba: ' . $conn->error . '</p>';
         }
         $conn->close();
-        header("Location: /hirdetesek/ads.php");
-        exit();
+        /*header("Location: /ads.php");
+        exit();*/
     }
 }
 
@@ -51,7 +51,7 @@ function printCategorySelector()
     $categories = getCategories();
 
     echo '<form class="mb-3" method="GET" action="ads.php">';
-    echo '<div class="container my-4">';  // Bootstrap container a margókkal
+    echo '<div class="container my-4">';  
 
     echo '<div class="row">';  
     echo '<div class="col-12">';  
@@ -96,7 +96,8 @@ function listAds()
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Táblázat megjelenítése, ha vannak találatok
+        // Reszponzív táblázat megjelenítése
+        echo "<div class='table-responsive'>"; // Reszponzív táblázat körül egy div
         echo "<table class='table table-striped table-hover'><tr><th>Termék neve</th><th>Termék leírása</th><th>Termék ára</th><th>Eladó neve</th><th>Eladó email címe</th></tr>";
 
         while ($row = $result->fetch_assoc()) {
@@ -109,6 +110,7 @@ function listAds()
             echo "</tr>";
         }
         echo "</table>";
+        echo "</div>"; // Reszponzív táblázat div vége
     } else {
         // Nincs találat
         echo "<p>Nincsenek elérhető hirdetések.</p>";
@@ -117,24 +119,23 @@ function listAds()
     // Kapcsolat bezárása
     $conn->close();
 }
+
 
 function listAdsParams($category)
 {
     $conn = dbInit();
 
     // SQL lekérdezés, INNER JOIN a felhasználói adatokkal
-    $sql = "SELECT ads.id, ads.name, ads.description, ads.price, ads.category, users.email, users.firstName, users.lastName\n"
-
-    . "FROM ads\n"
-
-    . "INNER JOIN users ON ads.ownerId = users.id\n"
-
-    . "WHERE ads.category='".$category."';";
+    $sql = "SELECT ads.id, ads.name, ads.description, ads.price, ads.category, users.email, users.firstName, users.lastName
+            FROM ads
+            INNER JOIN users ON ads.ownerId = users.id
+            WHERE ads.category='".$category."';";
 
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
-        // Táblázat megjelenítése, ha vannak találatok
+        // Reszponzív táblázat megjelenítése
+        echo "<div class='table-responsive'>"; // Reszponzív táblázat körül egy div
         echo "<table class='table table-striped table-hover'><tr><th>Termék neve</th><th>Termék leírása</th><th>Termék ára</th><th>Eladó neve</th><th>Eladó email címe</th></tr>";
 
         while ($row = $result->fetch_assoc()) {
@@ -147,6 +148,7 @@ function listAdsParams($category)
             echo "</tr>";
         }
         echo "</table>";
+        echo "</div>"; // Reszponzív táblázat div vége
     } else {
         // Nincs találat
         echo "<p>Nincsenek elérhető hirdetések.</p>";
@@ -155,3 +157,4 @@ function listAdsParams($category)
     // Kapcsolat bezárása
     $conn->close();
 }
+

@@ -49,7 +49,7 @@ function checkLogin()
         $succ = checkUserPass($email, $password, $conn);
         if ($succ != false) {
             setcookie("currentUser", $succ, time() + (86400 * 30), "/");
-            header("Location: /hirdetesek/login.php");
+            header("Location: /login.php");
             exit();
         } else {
             echo '<p class="error">Helytelen jelszó vagy email!</p>';
@@ -60,24 +60,34 @@ function checkLogin()
 function loginForm()
 {
     echo '<div class="container my-4">
-    <div class="row">
-        <div class="col-12">
-    <form action="login.php" method="post">
-    <label class="form-label" for="email">Email</label>
-    <input class="form-control" type="email" name="email">
+            <div class="row">
+                <div class="col-12">
+                    <form action="login.php" method="post" class="d-flex flex-column align-items-center">
+                        <h2>Hirdetés feltöltéséhez jelentkezz be!</h2>
+                        <div class="mb-3 w-100">
+                            <label class="form-label" for="email">Email</label>
+                            <input class="form-control" type="email" name="email" required>
+                        </div>
 
-    <label class="form-label" for="password">Jelszó</label>
-    <input class="form-control" type="password" name="password">
+                        <div class="mb-3 w-100">
+                            <label class="form-label" for="password">Jelszó</label>
+                            <input class="form-control" type="password" name="password" required>
+                        </div>
 
-    <input class="btn btn-primary my-4" type="submit" value="Bejelentkezés">
+                        <div class="text-center">
+                            <input class="btn btn-primary my-4" type="submit" value="Bejelentkezés">
+                        </div>
 
-    <br>
-    <a href="register.php">Új regisztráció létrehozása</a>
-</form>
-        </div>
-    </div>
-</div>';
+                        <div class="text-center">
+                            <a href="register.php">Új regisztráció létrehozása</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>';
 }
+
+
 
 function profileForm()
 {
@@ -121,7 +131,7 @@ function checkUserMod()
         // A lekérdezés végrehajtása
         if ($conn->query($sql) === TRUE) {
             // Sikeres frissítés esetén átirányítás
-            header("Location: /hirdetesek/login.php");
+            header("Location: /login.php");
             exit();
         } else {
             // Hiba esetén hibaüzenet kiírása
@@ -184,7 +194,7 @@ function checkRegister()
         // Lekérdezés futtatása
         if ($conn->query($sql) === TRUE) {
             setcookie("currentUser", $guid, time() + (86400 * 30), "/"); // 30 napig érvényes cookie beállítása
-            header("Location: /hirdetesek/login.php"); // Továbbirányítás a bejelentkezés oldalra
+            header("Location: /login.php"); // Továbbirányítás a bejelentkezés oldalra
             exit();  // Fontos az exit használata a header után
         } else {
             echo '<p class="error">Adatbázis hiba: ' . $conn->error . '</p>';

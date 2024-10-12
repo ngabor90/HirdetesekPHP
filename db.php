@@ -1,10 +1,10 @@
 <?php
 
 function dbInit(){
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "hirdetesek";
+    $servername = "mysql.rackhost.hu";
+    $username = "c53281phpaprohir";
+    $password = "OzzyMotorhead666";
+    $dbname = "c53281phpaprohirdetesek";
 
     //Create connection
     $conn = new mysqli($servername, $username, $password, $dbname);

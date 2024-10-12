@@ -1,18 +1,70 @@
-*{
+/* Globális beállítások */
+* {
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.nav-item{
+/* Testreszabott stílus a teljes oldalra */
+html, body {
+    height: 100%; /* A footer pozicionálása érdekében */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+   
+}
+
+/* Navigációs menüpontok középre igazítása */
+.nav-item {
     text-align: center !important;
 }
 
-.error{
+/* Mobil nézetben a navigációs linkek középre igazítása */
+@media (max-width: 768px) {
+    .navbar-nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+}
+
+/* Gombok középre igazítása */
+.navbar-collapse {
+    justify-content: space-between !important;
+}
+
+/* Hibaüzenetek */
+.error {
     color: red;
     border: 3px solid red;
     background-color: black;
     font-size: 1.2rem;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center; /* Hibaüzenet középre igazítása */
 }
-p{
+
+/* Beállítás a footer számára, hogy mindig a lap alján legyen */
+#footer {
+    background-color: #343a40;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    margin-top: auto; /* Flexbox segítségével a lap aljára kerül */
+}
+
+/* További alapértelmezett stílusok */
+p {
     margin: 0;
     padding: 0;
-}   
+}
+
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
